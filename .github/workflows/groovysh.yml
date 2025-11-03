@@ -25,4 +25,4 @@ jobs:
       run: unzip -q apache-groovy-binary-5.0.2.zip
     - name: Run groovysh here
       timeout-minutes: 1
-      run: ./groovy-5.0.2/bin/groovysh --evaluate /exit
+      run: sh -x ./groovy-5.0.2/bin/groovysh --evaluate /exit
