@@ -23,16 +23,20 @@ jobs:
       run: wget -q https://www.apache.org/dyn/closer.lua/groovy/5.0.2/distribution/apache-groovy-binary-5.0.2.zip?action=download -O apache-groovy-binary-5.0.2.zip
     - name: Unpack Groovy distribution
       run: unzip -q apache-groovy-binary-5.0.2.zip
-    - name: Run groovysh here
-      timeout-minutes: 1
-      run: sh -x ./groovy-5.0.2/bin/groovysh --evaluate /exit
     - name: Clone JDK repository
-      run: git clone -q https://github.com/openjdk/jdk jdk1
+      run: mkdir -p jdks/one && git clone -q https://github.com/openjdk/jdk jdks/one/jdk1
+    - name: Copy JDK repository
+      run: mkdir -p jdks/two && for copy in 2 3; do cp -r jdks/one/jdk1 jdks/two/jdk${copy}; done
+    - name: Copy JDK repository
+      run: for copy in 4 5 6 7 8; do cp -r jdks/one/jdk1 jdks/jdk${copy}; done
+    - name: Prepare empty directory
+      run: mkdir jdks/empty
+    - name: Run groovysh in empty directory
+      timeout-minutes: 1
+      run: cd jdks/empty && sh -x ../../groovy-5.0.2/bin/groovysh --evaluate /exit
     - name: Run groovysh with one JDK repository cloned
       timeout-minutes: 1
-      run: sh -x ./groovy-5.0.2/bin/groovysh --evaluate /exit
-    - name: Copy JDK repository
-      run: cp -r jdk1 jdk2
+      run: cd jdks/one   && sh -x ../../groovy-5.0.2/bin/groovysh --evaluate /exit
     - name: Run groovysh with two JDK repository clones
       timeout-minutes: 1
-      run: sh -x ./groovy-5.0.2/bin/groovysh --evaluate /exit
+      run: cd jdks/two   && sh -x ../../groovy-5.0.2/bin/groovysh --evaluate /exit
