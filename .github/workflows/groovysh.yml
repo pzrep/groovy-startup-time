@@ -31,3 +31,8 @@ jobs:
     - name: Run groovysh with one JDK repository cloned
       timeout-minutes: 1
       run: sh -x ./groovy-5.0.2/bin/groovysh --evaluate /exit
+    - name: Copy JDK repository
+      run: cp -r jdk1 jdk2
+    - name: Run groovysh with two JDK repository clones
+      timeout-minutes: 1
+      run: sh -x ./groovy-5.0.2/bin/groovysh --evaluate /exit
