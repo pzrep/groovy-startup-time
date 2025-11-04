@@ -40,3 +40,6 @@ jobs:
     - name: Run groovysh with two JDK repository clones
       timeout-minutes: 1
       run: cd jdks/two   && sh -x ../../groovy-5.0.2/bin/groovysh --evaluate /exit
+    - name: Run groovysh with eight JDK repository clones
+      timeout-minutes: 1
+      run: cd jdks       && sh -x    ../groovy-5.0.2/bin/groovysh --evaluate /exit
