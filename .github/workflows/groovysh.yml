@@ -27,7 +27,7 @@ jobs:
       timeout-minutes: 1
       run: sh -x ./groovy-5.0.2/bin/groovysh --evaluate /exit
     - name: Clone JDK repository
-      run: git clone https://github.com/openjdk/jdk jdk1
+      run: git clone -q https://github.com/openjdk/jdk jdk1
     - name: Run groovysh with one JDK repository cloned
       timeout-minutes: 1
       run: sh -x ./groovy-5.0.2/bin/groovysh --evaluate /exit
